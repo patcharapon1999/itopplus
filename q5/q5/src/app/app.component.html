@@ -1,0 +1,146 @@
+<style>
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 8px;
+  }
+
+  .toolbar #youtube-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo:hover,
+  .toolbar #youtube-logo:hover {
+    opacity: 0.8;
+  }
+
+  .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input {
+    width: 400px;
+    height: 30px;
+    margin: 10px;
+    font-size: 20px;
+    font-family: sans-serif;
+  }
+
+  label {
+    display: inline-block;
+    width: 100px;
+    font-size: 20px;
+    font-family: sans-serif;
+  }
+
+  button {
+    width: 525px;
+    height: 30px;
+    font-size: 20px;
+    font-family: sans-serif;
+    margin-top: 20px;
+    background-color: #1976d2;
+    border-color: #1976d2;
+    color: white;
+  }
+
+  form {
+    margin-top: 200px;
+  }
+  .text-danger {
+    color: tomato;
+    margin-left: 120px;
+    font-family: sans-serif;
+    font-size: 14px;
+  }
+  /* Responsive Styles */
+  @media screen and (max-width: 767px) {
+  }
+
+  @media screen and (max-width: 575px) {
+  }
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <img
+    width="40"
+    alt="Angular Logo"
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+  />
+</div>
+
+<div class="content" role="main">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <label> Name: </label>
+    <input type="text" formControlName="name" class="form-control" />
+    <br />
+    <div *ngIf="f.name.touched && f.name.invalid" class="text-danger">
+      <div *ngIf="f.name.errors.required">Name is required</div>
+      <div *ngIf="f.name.errors?.minlength">
+        Minimum 4 character are required.
+      </div>
+    </div>
+
+    <label> Surname: </label>
+    <input type="text" formControlName="surname" class="form-control" />
+    <br />
+    <div *ngIf="f.surname.touched && f.surname.invalid" class="text-danger">
+      <div *ngIf="f.surname.errors.required">Surname is required</div>
+      <div *ngIf="f.surname.errors?.minlength">
+        Minimum 4 character are required.
+      </div>
+    </div>
+
+    <label> Tel: </label>
+    <input type="text" formControlName="tel" class="form-control" />
+    <br />
+    <div *ngIf="f.tel.touched && f.tel.invalid" class="text-danger">
+      <div *ngIf="f.tel.errors.required">Tel is required</div>
+      <div *ngIf="f.tel.errors?.pattern">
+        Tel must in 0xx-xxxxxxx format
+      </div>
+    </div>
+
+    <label> E-mail: </label>
+    <input type="text" formControlName="email" class="form-control" />
+    <br />
+    <div *ngIf="f.email.touched && f.email.invalid" class="text-danger">
+      <div *ngIf="f.email.errors.required">Email is required</div>
+      <div *ngIf="f.email.errors.email">
+        Email must be a valid email address
+      </div>
+    </div>
+
+    <label> Note: </label>
+    <input type="text" formControlName="note" class="form-control" />
+    <br />
+    <div *ngIf="f.note.touched && f.note.invalid" class="text-danger">
+      <div *ngIf="f.note.errors.required">Note is required</div>
+    </div>
+
+    <button type="submit" [disabled]="userForm.invalid">Submit</button>
+  </form>
+</div>
